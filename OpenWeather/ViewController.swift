@@ -1,5 +1,5 @@
 import UIKit
-
+// Gavokod
 class ViewController: UIPageViewController {
    
    var pagesArray = [UIViewController]()
