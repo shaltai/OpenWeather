@@ -30,6 +30,10 @@ class DailyTableViewCell: UITableViewCell {
                                                  ["Night": "\(Int(data.temp.night))˚C"]]
 
       // Populate cell
+      for case let view in stackView.subviews {
+         view.removeFromSuperview()
+      }
+      
       for item in 0...dailyDictionary.count - 1 {
          let contentViews = Array(repeating: UIView(), count: dailyDictionary.count)
 

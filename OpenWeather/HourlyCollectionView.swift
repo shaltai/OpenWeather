@@ -29,7 +29,7 @@ extension HourlyCollectionView: UICollectionViewDelegateFlowLayout, UICollection
    
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
-      cell.backgroundColor = .systemRed
+//      cell.backgroundColor = .systemRed
       
       let defaultHourly = WeatherModel.Hourly(dt: Date(), temp: 0.0, weather: [WeatherModel.Hourly.Weather(icon: "")])
       cell.initHourlyCollectionViewCell(data: data?.hourly[indexPath.row] ?? defaultHourly)
