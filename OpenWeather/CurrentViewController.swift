@@ -8,7 +8,6 @@ class CurrentViewController: UIViewController {
    private let stackView = UIStackView()
    private let mainView = MainView()
    var supplementaryView = SupplementaryView()
-   private var dailyTableView = DailyTableViewController()
    
    override func viewDidLoad() {
       super.viewDidLoad()

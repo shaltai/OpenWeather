@@ -3,13 +3,9 @@ import Alamofire
 import CoreLocation
 
 class WeatherLoader {
+   let locationManager = CLLocationManager()
    
    func loadWeather(completionHandler: @escaping (WeatherModel) -> Void) {
-      
-      let locationManager = CLLocationManager()
-      //      guard let lattitude = locationManager.location?.coordinate.latitude,
-      //                longitude = locationManager.location?.coordinate.longitude
-      //      else { return }
       
       let lattitude = locationManager.location?.coordinate.latitude ?? 55.751244
       let longitude = locationManager.location?.coordinate.longitude ?? 37.618423
@@ -34,13 +30,5 @@ class WeatherLoader {
             print("Error is \(response.error!)")
          }
       }
-      
-//      if let lattitude = locationManager.location?.coordinate.latitude,
-//         let longitude = locationManager.location?.coordinate.longitude {
-//
-//
-//      }
-      
-      
    }
 }

@@ -22,10 +22,12 @@ class LocationDateView: UIView {
    
    // Setup
    func setup() {
-      LocationLoader().loadLocation { [self] location in
-         let cityName = location?.locality ?? "Moscow"
-         let countryName = location?.country ?? "Russia"
-         locationNameLabel.text = countryName + ", " + cityName
+      LocationLoader().loadLocation { location in
+         guard let cityName = location?.locality,
+               let countryName = location?.country else { return }
+//         let cityName = location?.locality ?? "Moscow"
+//         let countryName = location?.country ?? "Russia"
+         self.locationNameLabel.text = countryName + ", " + cityName
       }
       locationNameLabel.textColor = .systemGray
       locationNameLabel.font = UIFont.systemFont(ofSize: 20)
