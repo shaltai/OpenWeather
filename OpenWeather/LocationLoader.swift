@@ -4,8 +4,7 @@ import CoreLocation
 class LocationLoader {
    
    func loadLocation(locationManager: CLLocationManager, completionHandler: @escaping (CLPlacemark?) -> Void ) {
-      locationManager.requestWhenInUseAuthorization()
-      locationManager.startUpdatingLocation()
+      
       // Use the last reported location
       if let lastLocation = locationManager.location {
          let geocoder = CLGeocoder()
@@ -26,6 +25,6 @@ class LocationLoader {
          completionHandler(nil)
          print("No location was available")
       }
-      locationManager.stopUpdatingLocation()
+//      locationManager.stopUpdatingLocation()
    }
 }

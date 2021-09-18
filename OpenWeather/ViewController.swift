@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 
 class ViewController: UIPageViewController {
    
@@ -8,6 +9,7 @@ class ViewController: UIPageViewController {
    
    let spinner = UIActivityIndicatorView(style: .large)
    let loaderView = UIVisualEffectView()
+   private let locationManager = CLLocationManager()
    
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -51,10 +53,13 @@ class ViewController: UIPageViewController {
       pagesArray.append(pageCurrentWeather)
       pagesArray.append(pageDailyForecast)
       
-      // Pass data
+      // Krutilka-Vertel'ka
       showSpinner()
+      guard let lattitude = locationManager.location?.coordinate.latitude else { return }
+      guard let longitude = locationManager.location?.coordinate.longitude else { return }
       
-      WeatherLoader().loadWeather() { data in
+      // Pass data
+      WeatherLoader().loadWeather(lattitude: lattitude, longitude: longitude) { data in
          pageCurrentWeather.initCurrentView(data: data)
          pageCurrentWeather.supplementaryView.hourlyCollectionView.reloadData()
          pageDailyForecast.initDailyTableView(data: data)
