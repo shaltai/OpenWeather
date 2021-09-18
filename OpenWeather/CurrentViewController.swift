@@ -3,7 +3,7 @@ import CoreLocation
 import Alamofire
 
 class CurrentViewController: UIViewController {
-   
+   // sdfsdf
    private let locationDateView = LocationDateView()
    private let stackView = UIStackView()
    private let mainView = MainView()
