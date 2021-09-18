@@ -11,7 +11,7 @@ class CurrentViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
-      
+       
       setupLocationDateView()
       setupStackView()
    }
