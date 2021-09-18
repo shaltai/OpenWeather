@@ -4,6 +4,7 @@ import CoreLocation
 class LocationDateView: UIView {
    
    // Variables
+   private let locationManager = CLLocationManager()
    let locationNameLabel = UILabel()
    let dateLabel = UILabel()
    let formatter = DateFormatter()
@@ -22,13 +23,15 @@ class LocationDateView: UIView {
    
    // Setup
    func setup() {
-      LocationLoader().loadLocation { location in
+      LocationLoader().loadLocation(locationManager: locationManager) { location in
+         print(location)
          guard let cityName = location?.locality,
                let countryName = location?.country else { return }
 //         let cityName = location?.locality ?? "Moscow"
 //         let countryName = location?.country ?? "Russia"
          self.locationNameLabel.text = countryName + ", " + cityName
       }
+      
       locationNameLabel.textColor = .systemGray
       locationNameLabel.font = UIFont.systemFont(ofSize: 20)
       formatter.dateFormat = "EEEE, MMM d"
@@ -48,5 +51,4 @@ class LocationDateView: UIView {
       dateLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
    }
 }
-
 

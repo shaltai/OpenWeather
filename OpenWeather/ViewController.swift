@@ -53,6 +53,7 @@ class ViewController: UIPageViewController {
       
       // Pass data
       showSpinner()
+      
       WeatherLoader().loadWeather() { data in
          pageCurrentWeather.initCurrentView(data: data)
          pageCurrentWeather.supplementaryView.hourlyCollectionView.reloadData()
