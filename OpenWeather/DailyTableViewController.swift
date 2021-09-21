@@ -1,6 +1,7 @@
 import UIKit
 
 class DailyTableViewController: UITableViewController {
+   
    var data: WeatherModel?
    
    override func viewDidLoad() {

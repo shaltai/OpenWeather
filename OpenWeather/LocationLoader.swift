@@ -12,7 +12,9 @@ class LocationLoader {
          geocoder.reverseGeocodeLocation(lastLocation, completionHandler: { placemarks, error in
             if error == nil {
                let firstLocation = placemarks?.first
-               completionHandler(firstLocation)
+//               DispatchQueue.main.async {
+                  completionHandler(firstLocation)
+//               }
             }
             else {
                // An error occurred during geocoding
@@ -25,6 +27,6 @@ class LocationLoader {
          completionHandler(nil)
          print("No location was available")
       }
-//      locationManager.stopUpdatingLocation()
+      locationManager.stopUpdatingLocation()
    }
 }

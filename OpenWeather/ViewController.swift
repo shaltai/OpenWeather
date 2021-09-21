@@ -3,20 +3,63 @@ import CoreLocation
 
 class ViewController: UIPageViewController {
    
+   let pageCurrentWeather = CurrentViewController()
+   let pageDailyForecast = DailyTableViewController()
    var pagesArray = [UIViewController]()
    let pageControl = UIPageControl()
    let initialPage = 0
    
    let spinner = UIActivityIndicatorView(style: .large)
    let loaderView = UIVisualEffectView()
-   private let locationManager = CLLocationManager()
+   let locationManager = CLLocationManager()
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
+      checkLocationService()
       setup()
    }
    
+   // Location
+   func checkLocationService() {
+      
+      // Is location enabled
+      if CLLocationManager.locationServicesEnabled() {
+         locationManager.delegate = self
+         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+         locationManager.startUpdatingLocation()
+         locationManager.requestWhenInUseAuthorization()
+         
+         // Is app authorized
+//         switch locationManager.authorizationStatus {
+//
+//         case .authorizedWhenInUse:
+//            LocationLoader().loadLocation(locationManager: locationManager) { placemark in
+////               print(placemark as Any)
+//            }
+//         case .denied:
+//            break
+//         case .notDetermined:
+//            locationManager.requestWhenInUseAuthorization()
+//         default:
+//            break
+//         }
+         
+      } else {
+         
+         print("Cлужбы геолокации недоступны")
+         let alert = UIAlertController(title: "Location Services are Disabled",
+                                       message: "Turn on location services to allow OpenWeather to determine your location",
+                                       preferredStyle: .alert)
+         alert.addAction(UIAlertAction(title: "OK",
+                                       style: .cancel))
+         DispatchQueue.main.async {
+            self.present(alert, animated: true)
+         }
+      }
+   }
+   
+   // Show/hide loader
    func showSpinner() {
       
       // Background
@@ -33,9 +76,9 @@ class ViewController: UIPageViewController {
       
       // Constraints
       loaderView.setupEdgeConstraints(top: view.topAnchor,
-                                           trailing: view.trailingAnchor,
-                                           bottom: view.bottomAnchor,
-                                           leading: view.leadingAnchor)
+                                      trailing: view.trailingAnchor,
+                                      bottom: view.bottomAnchor,
+                                      leading: view.leadingAnchor)
       spinner.setupCenterConstraints(to: loaderView)
       spinner.setupEdgeConstraints(size: CGSize(width: 80, height: 80))
    }
@@ -47,25 +90,17 @@ class ViewController: UIPageViewController {
    
    func setup() {
       
+      // Krutilka-Vertel'ka
+      showSpinner()
+//      guard let lattitude = locationManager.location?.coordinate.latitude else { return }
+//      guard let longitude = locationManager.location?.coordinate.longitude else { return }
+      
       // Array of viewControllers
-      let pageCurrentWeather = CurrentViewController()
-      let pageDailyForecast = DailyTableViewController()
+      
       pagesArray.append(pageCurrentWeather)
       pagesArray.append(pageDailyForecast)
       
-      // Krutilka-Vertel'ka
-      showSpinner()
-      guard let lattitude = locationManager.location?.coordinate.latitude else { return }
-      guard let longitude = locationManager.location?.coordinate.longitude else { return }
-      
-      // Pass data
-      WeatherLoader().loadWeather(lattitude: lattitude, longitude: longitude) { data in
-         pageCurrentWeather.initCurrentView(data: data)
-         pageCurrentWeather.supplementaryView.hourlyCollectionView.reloadData()
-         pageDailyForecast.initDailyTableView(data: data)
-         pageDailyForecast.tableView.reloadData()
-         self.hideSpinner()
-      }
+
       
       dataSource = self
       delegate = self
@@ -123,6 +158,34 @@ extension ViewController: UIPageViewControllerDataSource, UIPageViewControllerDe
    }
 }
 
+extension ViewController: CLLocationManagerDelegate {
+   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+      
+      if manager.authorizationStatus == .authorizedWhenInUse {
+//         print("Authorization granted")
+         LocationLoader().loadLocation(locationManager: manager) { placemark in
+//            print(placemark)
+            if let placemark = placemark {
+               CurrentViewController().initCurrentView(placemark: placemark)
+               self.hideSpinner()
+            }
+            
+         }
+         // Pass data
+         WeatherLoader().loadWeather(location: manager.location) { [self] data in
+            pageCurrentWeather.initCurrentView(data: data)
+            pageCurrentWeather.supplementaryView.hourlyCollectionView.reloadData()
+            pageDailyForecast.initDailyTableView(data: data)
+            pageDailyForecast.tableView.reloadData()
+            //         self.hideSpinner()
+         }
+      }
+   }
+   
+//   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//      WeatherLoader().location = locations.first
+//   }
+}
 
 // Constraints extension
 extension UIView {
@@ -170,3 +233,7 @@ extension UIView {
       }
    }
 }
+
+
+
+

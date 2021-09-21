@@ -8,18 +8,26 @@ class CurrentViewController: UIViewController {
    private let stackView = UIStackView()
    private let mainView = MainView()
    var supplementaryView = SupplementaryView()
+   //   let locationManager = CLLocationManager()
    
    override func viewDidLoad() {
       super.viewDidLoad()
-       
+      
       setupLocationDateView()
       setupStackView()
+      //      checkLocationService()
    }
    
    func initCurrentView(data: WeatherModel) {
       mainView.initMainView(data: data)
       supplementaryView.initSupplementaryView(data: data)
    }
+   
+   func initCurrentView(placemark: CLPlacemark) {
+//      print(placemark)
+      locationDateView.initLocationDateView(placemark: placemark)
+   }
+   
    
    // Location and date
    func setupLocationDateView() {
@@ -53,3 +61,6 @@ class CurrentViewController: UIViewController {
    }
 }
 
+extension CurrentViewController: CLLocationManagerDelegate {
+   
+}
