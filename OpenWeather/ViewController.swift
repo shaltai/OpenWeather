@@ -26,7 +26,6 @@ class ViewController: UIPageViewController {
       // Is location enabled
       if CLLocationManager.locationServicesEnabled() {
          locationManager.delegate = self
-         locationManager.desiredAccuracy = kCLLocationAccuracyBest
          locationManager.startUpdatingLocation()
          locationManager.requestWhenInUseAuthorization()
          
@@ -47,7 +46,6 @@ class ViewController: UIPageViewController {
          
       } else {
          
-         print("Cлужбы геолокации недоступны")
          let alert = UIAlertController(title: "Location Services are Disabled",
                                        message: "Turn on location services to allow OpenWeather to determine your location",
                                        preferredStyle: .alert)
@@ -90,17 +88,12 @@ class ViewController: UIPageViewController {
    
    func setup() {
       
-      // Krutilka-Vertel'ka
+      // Loader
       showSpinner()
-//      guard let lattitude = locationManager.location?.coordinate.latitude else { return }
-//      guard let longitude = locationManager.location?.coordinate.longitude else { return }
       
-      // Array of viewControllers
-      
+      // Add views
       pagesArray.append(pageCurrentWeather)
       pagesArray.append(pageDailyForecast)
-      
-
       
       dataSource = self
       delegate = self
@@ -162,74 +155,23 @@ extension ViewController: CLLocationManagerDelegate {
    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
       
       if manager.authorizationStatus == .authorizedWhenInUse {
-//         print("Authorization granted")
+         
+         // Pass placemark
          LocationLoader().loadLocation(locationManager: manager) { placemark in
-//            print(placemark)
             if let placemark = placemark {
-               CurrentViewController().initCurrentView(placemark: placemark)
-               self.hideSpinner()
+               LocationDateView().initLocationDateView(placemark: placemark)
             }
-            
          }
+         
          // Pass data
          WeatherLoader().loadWeather(location: manager.location) { [self] data in
             pageCurrentWeather.initCurrentView(data: data)
             pageCurrentWeather.supplementaryView.hourlyCollectionView.reloadData()
             pageDailyForecast.initDailyTableView(data: data)
             pageDailyForecast.tableView.reloadData()
-            //         self.hideSpinner()
+            
+            self.hideSpinner()
          }
-      }
-   }
-   
-//   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//      WeatherLoader().location = locations.first
-//   }
-}
-
-// Constraints extension
-extension UIView {
-   func setupSizeConstraints(to view: UIView,
-                             widthMultiplier: CGFloat = .zero,
-                             heightMultiplier: CGFloat = .zero) {
-      translatesAutoresizingMaskIntoConstraints = false
-      
-      widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widthMultiplier).isActive = true
-      heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: heightMultiplier).isActive = true
-   }
-   
-   func setupCenterConstraints(to view: UIView) {
-      translatesAutoresizingMaskIntoConstraints = false
-      
-      centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-      centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-   }
-   
-   func setupEdgeConstraints(top: NSLayoutYAxisAnchor? = nil,
-                             trailing: NSLayoutXAxisAnchor? = nil,
-                             bottom: NSLayoutYAxisAnchor? = nil,
-                             leading: NSLayoutXAxisAnchor? = nil,
-                             size: CGSize = .zero,
-                             padding: UIEdgeInsets = .zero) {
-      translatesAutoresizingMaskIntoConstraints = false
-      
-      if let top = top {
-         topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
-      }
-      if let trailing = trailing {
-         trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
-      }
-      if let bottom = bottom {
-         bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).isActive = true
-      }
-      if let leading = leading {
-         leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
-      }
-      if size.width != 0 {
-         widthAnchor.constraint(equalToConstant: size.width).isActive = true
-      }
-      if size.height != 0 {
-         heightAnchor.constraint(equalToConstant: size.height).isActive = true
       }
    }
 }

@@ -8,14 +8,14 @@ class CurrentViewController: UIViewController {
    private let stackView = UIStackView()
    private let mainView = MainView()
    var supplementaryView = SupplementaryView()
-   //   let locationManager = CLLocationManager()
    
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      setupLocationDateView()
-      setupStackView()
-      //      checkLocationService()
+      DispatchQueue.main.async {
+         self.setupLocationDateView()
+         self.setupStackView()
+      }
    }
    
    func initCurrentView(data: WeatherModel) {
@@ -23,17 +23,11 @@ class CurrentViewController: UIViewController {
       supplementaryView.initSupplementaryView(data: data)
    }
    
-   func initCurrentView(placemark: CLPlacemark) {
-//      print(placemark)
-      locationDateView.initLocationDateView(placemark: placemark)
-   }
-   
-   
    // Location and date
    func setupLocationDateView() {
       locationDateView.backgroundColor = .systemYellow
-      view.addSubview(locationDateView)
       
+      view.addSubview(locationDateView)
       // Constraints
       locationDateView.setupEdgeConstraints(top: view.safeAreaLayoutGuide.topAnchor,
                                             trailing: view.safeAreaLayoutGuide.trailingAnchor,
@@ -61,6 +55,3 @@ class CurrentViewController: UIViewController {
    }
 }
 
-extension CurrentViewController: CLLocationManagerDelegate {
-   
-}

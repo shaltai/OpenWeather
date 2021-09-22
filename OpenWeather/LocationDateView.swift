@@ -4,8 +4,6 @@ import CoreLocation
 class LocationDateView: UIView {
    
    let locationNameLabel = UILabel()
-   var cityName = String()
-   var countryName = String()
    let dateLabel = UILabel()
    let formatter = DateFormatter()
    
@@ -18,9 +16,10 @@ class LocationDateView: UIView {
    
    func initLocationDateView(placemark: CLPlacemark) {
 //      print (Thread.current)
+      let cityName = placemark.locality ?? "Moscow"
+      let countryName = placemark.country ?? "Russia"
+      
       DispatchQueue.main.async { [self] in
-         cityName = placemark.locality ?? "Moscow"
-         countryName = placemark.country ?? "Russia"
          locationNameLabel.text = cityName + ", " + countryName
          print(self.locationNameLabel.text as Any)
       }
