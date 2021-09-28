@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4415EF1D26E4E02B00DC3AB0 /* CurrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415EF1C26E4E02B00DC3AB0 /* CurrentViewController.swift */; };
 		442F8DE526D2DD89004D5A24 /* SupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442F8DE426D2DD89004D5A24 /* SupplementaryView.swift */; };
+		443A283926FB36E6000A81BE /* Constraints Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A283826FB36E6000A81BE /* Constraints Extension.swift */; };
 		444BA05026C0497E00F45D07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444BA04F26C0497E00F45D07 /* AppDelegate.swift */; };
 		444BA05226C0497E00F45D07 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444BA05126C0497E00F45D07 /* SceneDelegate.swift */; };
 		444BA05426C0497E00F45D07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444BA05326C0497E00F45D07 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		4415EF1C26E4E02B00DC3AB0 /* CurrentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentViewController.swift; sourceTree = "<group>"; };
 		442F8DE426D2DD89004D5A24 /* SupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementaryView.swift; sourceTree = "<group>"; };
+		443A283826FB36E6000A81BE /* Constraints Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constraints Extension.swift"; sourceTree = "<group>"; };
 		444BA04C26C0497E00F45D07 /* OpenWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		444BA04F26C0497E00F45D07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		444BA05126C0497E00F45D07 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,23 +97,15 @@
 		444BA04E26C0497E00F45D07 /* OpenWeather */ = {
 			isa = PBXGroup;
 			children = (
-				444BA05326C0497E00F45D07 /* ViewController.swift */,
-				4415EF1C26E4E02B00DC3AB0 /* CurrentViewController.swift */,
-				448CAA9026E135F80057CBE9 /* DailyTableViewController.swift */,
-				44DD980826E615A90080365E /* DailyTableViewCell.swift */,
-				442F8DE426D2DD89004D5A24 /* SupplementaryView.swift */,
-				44B7191626DE740E00FBCBE8 /* HourlyCollectionView.swift */,
-				44FFA77526DA875700BA8B31 /* HourlyCollectionViewCell.swift */,
-				44CFE9A826D8C7A5007901BC /* MainView.swift */,
-				44CFE9AA26D8D417007901BC /* LocationDateView.swift */,
-				447F2AD726CC2B06008C9A6E /* LocationLoader.swift */,
-				44DA3CA126CAF206008F5E83 /* WeatherModel.swift */,
-				44DA3CA326CAF426008F5E83 /* WeatherLoader.swift */,
+				44EBE7982700677400920C86 /* Models */,
+				44EBE7992700678C00920C86 /* Views */,
+				44EBE797270066EB00920C86 /* Controllers */,
 				444BA05126C0497E00F45D07 /* SceneDelegate.swift */,
 				444BA04F26C0497E00F45D07 /* AppDelegate.swift */,
 				444BA05826C0498000F45D07 /* Assets.xcassets */,
 				444BA05A26C0498000F45D07 /* LaunchScreen.storyboard */,
 				444BA05D26C0498000F45D07 /* Info.plist */,
+				443A283826FB36E6000A81BE /* Constraints Extension.swift */,
 			);
 			path = OpenWeather;
 			sourceTree = "<group>";
@@ -122,6 +116,39 @@
 				44D01A1F26C308090080B762 /* Alamofire.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44EBE797270066EB00920C86 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				444BA05326C0497E00F45D07 /* ViewController.swift */,
+				4415EF1C26E4E02B00DC3AB0 /* CurrentViewController.swift */,
+				448CAA9026E135F80057CBE9 /* DailyTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		44EBE7982700677400920C86 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				447F2AD726CC2B06008C9A6E /* LocationLoader.swift */,
+				44DA3CA126CAF206008F5E83 /* WeatherModel.swift */,
+				44DA3CA326CAF426008F5E83 /* WeatherLoader.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44EBE7992700678C00920C86 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				44CFE9A826D8C7A5007901BC /* MainView.swift */,
+				442F8DE426D2DD89004D5A24 /* SupplementaryView.swift */,
+				44CFE9AA26D8D417007901BC /* LocationDateView.swift */,
+				44B7191626DE740E00FBCBE8 /* HourlyCollectionView.swift */,
+				44FFA77526DA875700BA8B31 /* HourlyCollectionViewCell.swift */,
+				44DD980826E615A90080365E /* DailyTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,6 +234,7 @@
 				44CFE9AB26D8D417007901BC /* LocationDateView.swift in Sources */,
 				44DA3CA226CAF206008F5E83 /* WeatherModel.swift in Sources */,
 				444BA05226C0497E00F45D07 /* SceneDelegate.swift in Sources */,
+				443A283926FB36E6000A81BE /* Constraints Extension.swift in Sources */,
 				44FFA77626DA875700BA8B31 /* HourlyCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,15 +374,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JHYH5C9V6P;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = OpenWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sli.OpenWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = sli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,15 +394,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JHYH5C9V6P;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = OpenWeather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sli.OpenWeather;
+				PRODUCT_BUNDLE_IDENTIFIER = sli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
