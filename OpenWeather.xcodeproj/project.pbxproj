@@ -18,6 +18,7 @@
 		447F2AD826CC2B06008C9A6E /* LocationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F2AD726CC2B06008C9A6E /* LocationLoader.swift */; };
 		448CAA9126E135F80057CBE9 /* DailyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448CAA9026E135F80057CBE9 /* DailyTableViewController.swift */; };
 		44B7191726DE740E00FBCBE8 /* HourlyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B7191626DE740E00FBCBE8 /* HourlyCollectionView.swift */; };
+		44BD8B45271EA1E1000738EB /* WeatherModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44BD8B43271EA1E1000738EB /* WeatherModel.xcdatamodeld */; };
 		44CFE9A926D8C7A5007901BC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE9A826D8C7A5007901BC /* MainView.swift */; };
 		44CFE9AB26D8D417007901BC /* LocationDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE9AA26D8D417007901BC /* LocationDateView.swift */; };
 		44D01A2026C308090080B762 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D01A1F26C308090080B762 /* Alamofire.xcframework */; };
@@ -56,6 +57,7 @@
 		447F2AD726CC2B06008C9A6E /* LocationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationLoader.swift; sourceTree = "<group>"; };
 		448CAA9026E135F80057CBE9 /* DailyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewController.swift; sourceTree = "<group>"; };
 		44B7191626DE740E00FBCBE8 /* HourlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionView.swift; sourceTree = "<group>"; };
+		44BD8B44271EA1E1000738EB /* WeatherModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherModel.xcdatamodel; sourceTree = "<group>"; };
 		44CFE9A826D8C7A5007901BC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		44CFE9AA26D8D417007901BC /* LocationDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDateView.swift; sourceTree = "<group>"; };
 		44D01A1F26C308090080B762 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				447F2AD726CC2B06008C9A6E /* LocationLoader.swift */,
 				44DA3CA126CAF206008F5E83 /* WeatherModel.swift */,
 				44DA3CA326CAF426008F5E83 /* WeatherLoader.swift */,
+				44BD8B43271EA1E1000738EB /* WeatherModel.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			files = (
 				444BA05426C0497E00F45D07 /* ViewController.swift in Sources */,
 				44CFE9A926D8C7A5007901BC /* MainView.swift in Sources */,
+				44BD8B45271EA1E1000738EB /* WeatherModel.xcdatamodeld in Sources */,
 				44B7191726DE740E00FBCBE8 /* HourlyCollectionView.swift in Sources */,
 				444BA05026C0497E00F45D07 /* AppDelegate.swift in Sources */,
 				44DD980926E615A90080365E /* DailyTableViewCell.swift in Sources */,
@@ -431,6 +435,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		44BD8B43271EA1E1000738EB /* WeatherModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				44BD8B44271EA1E1000738EB /* WeatherModel.xcdatamodel */,
+			);
+			currentVersion = 44BD8B44271EA1E1000738EB /* WeatherModel.xcdatamodel */;
+			path = WeatherModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 444BA04426C0497E00F45D07 /* Project object */;
 }

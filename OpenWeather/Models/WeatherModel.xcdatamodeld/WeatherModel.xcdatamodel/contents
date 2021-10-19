@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Current" representedClassName="Current" syncable="YES" codeGenerationType="class">
+        <attribute name="feels_like" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="humidity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pressure" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="uvi" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="wind_deg" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="wind_speed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="currentWeather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CurrentWeather" inverseName="current" inverseEntity="CurrentWeather"/>
+    </entity>
+    <entity name="CurrentWeather" representedClassName="CurrentWeather" syncable="YES" codeGenerationType="class">
+        <attribute name="descr" optional="YES" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="iconURL" optional="YES" attributeType="URI"/>
+        <attribute name="main" optional="YES" attributeType="String"/>
+        <relationship name="current" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Current" inverseName="currentWeather" inverseEntity="Current"/>
+    </entity>
+    <entity name="Daily" representedClassName="Daily" syncable="YES" codeGenerationType="class">
+        <attribute name="dt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="dailyTemp" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyTemp" inverseName="daily" inverseEntity="DailyTemp"/>
+        <relationship name="dailyWeather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyWeather" inverseName="daily" inverseEntity="DailyWeather"/>
+    </entity>
+    <entity name="DailyTemp" representedClassName="DailyTemp" syncable="YES" codeGenerationType="class">
+        <attribute name="day" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="eve" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="morn" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="night" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="daily" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Daily" inverseName="dailyTemp" inverseEntity="Daily"/>
+    </entity>
+    <entity name="DailyWeather" representedClassName="DailyWeather" syncable="YES" codeGenerationType="class">
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="iconURL" optional="YES" attributeType="URI"/>
+        <relationship name="daily" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Daily" inverseName="dailyWeather" inverseEntity="Daily"/>
+    </entity>
+    <entity name="Hourly" representedClassName="Hourly" syncable="YES" codeGenerationType="class">
+        <attribute name="dt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="hourlyWeather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HourlyWeather" inverseName="hourly" inverseEntity="HourlyWeather"/>
+    </entity>
+    <entity name="HourlyWeather" representedClassName="HourlyWeather" syncable="YES" codeGenerationType="class">
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="iconURL" optional="YES" attributeType="URI"/>
+        <relationship name="hourly" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Hourly" inverseName="hourlyWeather" inverseEntity="Hourly"/>
+    </entity>
+    <elements>
+        <element name="Current" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="CurrentWeather" positionX="-54" positionY="45" width="128" height="104"/>
+        <element name="Hourly" positionX="-36" positionY="63" width="128" height="74"/>
+        <element name="HourlyWeather" positionX="-18" positionY="72" width="128" height="74"/>
+        <element name="Daily" positionX="-9" positionY="99" width="128" height="74"/>
+        <element name="DailyTemp" positionX="0" positionY="108" width="128" height="104"/>
+        <element name="DailyWeather" positionX="18" positionY="126" width="128" height="74"/>
+    </elements>
+</model>
