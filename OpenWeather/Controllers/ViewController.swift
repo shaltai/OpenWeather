@@ -39,7 +39,7 @@ class ViewController: UIPageViewController {
       if CLLocationManager.locationServicesEnabled() {
          
          // Loader
-         showSpinner()
+//         showSpinner()
          locationManager.delegate = self
          checkLocationAuthorization()
          
@@ -54,6 +54,7 @@ class ViewController: UIPageViewController {
             self.present(alert, animated: true)
          }
       }
+      // Stop updating location
       locationManager.stopUpdatingLocation()
    }
    

@@ -46,7 +46,7 @@ class DailyTableViewCell: UITableViewCell {
          contentViews[item].addSubview(daytimeLabel)
          stackView.addArrangedSubview(contentViews[item])
          
-         contentViews[item].backgroundColor = item % 2 == 0 ? .white : .systemGray
+         contentViews[item].backgroundColor = item % 2 == 0 ? .systemGray2 : .systemGray
          
          tempLabel.setupEdgeConstraints(top: contentViews[item].topAnchor,
                                         trailing: contentViews[item].trailingAnchor,

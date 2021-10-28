@@ -1,6 +1,8 @@
 import UIKit
 
 class HourlyCollectionViewCell: UICollectionViewCell {
+   let context = Persistance.shared.persistentContainer.viewContext
+   var hourlyCoreDataArray: [Hourly] = []
    
    let timeLabel = UILabel()
    let weatherIcon = UIImageView()

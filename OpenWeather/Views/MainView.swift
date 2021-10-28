@@ -1,7 +1,11 @@
 import UIKit
 
 class MainView: UIView {
+   let context = Persistance.shared.persistentContainer.viewContext
+   var currentCoreDataArray: [Current] = []
+   
    let contentView = UIView()
+   
    let currentWeatherIcon = UIImageView()
    let currentWeatherMain = UILabel()
    let currentWeatherDescription = UILabel()
@@ -10,18 +14,45 @@ class MainView: UIView {
    
    override init(frame: CGRect) {
       super.init(frame: frame)
+      // Fetch current weather from Core Data
+      do {
+         currentCoreDataArray = try context.fetch(Current.fetchRequest())
+         if !self.currentCoreDataArray.isEmpty {
+            self.currentTemp.text = "\(Int(self.currentCoreDataArray[0].temp))˚C"
+         }
+      } catch let error as NSError {
+         print("Error \(error), \(error.userInfo)")
+      }
       
       setup()
    }
    
    func initMainView(data: WeatherModel) {
+      let currentCoreData = Current(context: context)
+      
+      // Current weather icon
       if let imageData = try? Data(contentsOf: data.current.weather.first!.iconURL) {
          currentWeatherIcon.image = UIImage(data: imageData)
       }
+      // Current weather
       currentWeatherMain.text = data.current.weather.first?.main
+      // Current weather description
       currentWeatherDescription.text = data.current.weather.first?.description
-      currentTemp.text = "\(Int(data.current.temp))˚C"
+      
+      // Current temperature
+      // Update label value from json
+      DispatchQueue.main.async {
+         self.currentTemp.text = "\(data.current.temp)˚C"
+      }
+      // Update Core data value from json
+      currentCoreData.temp = data.current.temp
+      // Save context
+      Persistance.shared.saveContext(context: context)
+      
+      // Temperature feels like
       currentFeelsLike.text = "Feels like \(Int(data.current.feels_like))˚C"
+      
+      
    }
    
    func setup() {

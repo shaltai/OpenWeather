@@ -40,7 +40,7 @@ class SupplementaryView: UIView {
    func setupContentView() {
       
       // Setup
-      backgroundColor = .systemGreen
+      backgroundColor = .systemBlue
       contentView.backgroundColor = .systemPink
       
       // Add subviews
