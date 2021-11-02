@@ -14,11 +14,17 @@ class MainView: UIView {
    
    override init(frame: CGRect) {
       super.init(frame: frame)
+      
       // Fetch current weather from Core Data
       do {
+         // 2. Потом считываете данные из базы данных
          currentCoreDataArray = try context.fetch(Current.fetchRequest())
          if !self.currentCoreDataArray.isEmpty {
+            // 3. И только после этого отображаете данные в таблице
             self.currentTemp.text = "\(Int(self.currentCoreDataArray[0].temp))˚C"
+            for weather in currentCoreDataArray {
+               print(weather.temp)
+            }
          }
       } catch let error as NSError {
          print("Error \(error), \(error.userInfo)")
@@ -40,19 +46,14 @@ class MainView: UIView {
       currentWeatherDescription.text = data.current.weather.first?.description
       
       // Current temperature
-      // Update label value from json
-      DispatchQueue.main.async {
-         self.currentTemp.text = "\(data.current.temp)˚C"
-      }
       // Update Core data value from json
+      // 1. Вы загружаете данные, после чего сразу записываете их в реалм или CoreData
       currentCoreData.temp = data.current.temp
       // Save context
       Persistance.shared.saveContext(context: context)
       
       // Temperature feels like
       currentFeelsLike.text = "Feels like \(Int(data.current.feels_like))˚C"
-      
-      
    }
    
    func setup() {
