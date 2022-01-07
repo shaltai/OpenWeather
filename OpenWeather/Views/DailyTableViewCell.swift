@@ -30,24 +30,24 @@ class DailyTableViewCell: UITableViewCell {
                                                  ["Night": "\(Int(data.temp.night))˚C"]]
 
       // Populate cell
-      for case let view in stackView.subviews {
+      for view in stackView.subviews {
          view.removeFromSuperview()
       }
       
       for item in 0...dailyDictionary.count - 1 {
          let contentViews = Array(repeating: UIView(), count: dailyDictionary.count)
-
+         // Temperature and daytime labels
          let tempLabel = UILabel()
          let daytimeLabel = UILabel()
          tempLabel.text = dailyDictionary[item].values.first
          daytimeLabel.text = dailyDictionary[item].keys.first
-         
+         // Add subviews
          contentViews[item].addSubview(tempLabel)
          contentViews[item].addSubview(daytimeLabel)
          stackView.addArrangedSubview(contentViews[item])
-         
+         // Set background color for even odd items
          contentViews[item].backgroundColor = item % 2 == 0 ? .systemGray2 : .systemGray
-         
+         // Constraints
          tempLabel.setupEdgeConstraints(top: contentViews[item].topAnchor,
                                         trailing: contentViews[item].trailingAnchor,
                                         leading: contentViews[item].leadingAnchor)
