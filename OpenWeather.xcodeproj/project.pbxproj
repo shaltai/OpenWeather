@@ -34,6 +34,7 @@
 		44BD8B61271EC4B8000738EB /* DailyTemp+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BD8B53271EC4B8000738EB /* DailyTemp+CoreDataClass.swift */; };
 		44BD8B62271EC4B8000738EB /* DailyTemp+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BD8B54271EC4B8000738EB /* DailyTemp+CoreDataProperties.swift */; };
 		44BD8B64271EC697000738EB /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BD8B63271EC697000738EB /* Persistance.swift */; };
+		44C1548E2788DD2A00790959 /* Typography Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C1548D2788DD2A00790959 /* Typography Extension.swift */; };
 		44CFE9A926D8C7A5007901BC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE9A826D8C7A5007901BC /* MainView.swift */; };
 		44CFE9AB26D8D417007901BC /* LocationDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CFE9AA26D8D417007901BC /* LocationDateView.swift */; };
 		44D01A2026C308090080B762 /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D01A1F26C308090080B762 /* Alamofire.xcframework */; };
@@ -88,6 +89,7 @@
 		44BD8B53271EC4B8000738EB /* DailyTemp+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyTemp+CoreDataClass.swift"; sourceTree = "<group>"; };
 		44BD8B54271EC4B8000738EB /* DailyTemp+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyTemp+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		44BD8B63271EC697000738EB /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
+		44C1548D2788DD2A00790959 /* Typography Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Typography Extension.swift"; sourceTree = "<group>"; };
 		44CFE9A826D8C7A5007901BC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		44CFE9AA26D8D417007901BC /* LocationDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDateView.swift; sourceTree = "<group>"; };
 		44D01A1F26C308090080B762 /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				444BA05A26C0498000F45D07 /* LaunchScreen.storyboard */,
 				444BA05D26C0498000F45D07 /* Info.plist */,
 				443A283826FB36E6000A81BE /* Constraints Extension.swift */,
+				44C1548D2788DD2A00790959 /* Typography Extension.swift */,
 			);
 			path = OpenWeather;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				44BD8B45271EA1E1000738EB /* WeatherModel.xcdatamodeld in Sources */,
 				44B7191726DE740E00FBCBE8 /* HourlyCollectionView.swift in Sources */,
 				44BD8B61271EC4B8000738EB /* DailyTemp+CoreDataClass.swift in Sources */,
+				44C1548E2788DD2A00790959 /* Typography Extension.swift in Sources */,
 				44BD8B5A271EC4B8000738EB /* DailyWeather+CoreDataProperties.swift in Sources */,
 				444BA05026C0497E00F45D07 /* AppDelegate.swift in Sources */,
 				44BD8B64271EC697000738EB /* Persistance.swift in Sources */,
