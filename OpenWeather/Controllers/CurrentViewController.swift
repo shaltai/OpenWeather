@@ -12,7 +12,7 @@ class CurrentViewController: UIViewController {
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      view.backgroundColor = .systemOrange
+      view.backgroundColor = .systemBackground
       self.setupLocationDateView()
       self.setupStackView()
    }
@@ -31,7 +31,7 @@ class CurrentViewController: UIViewController {
    
    // Location and date
    func setupLocationDateView() {
-      locationDateView.backgroundColor = .white
+      locationDateView.backgroundColor = .systemBackground
       
       // Add views
       view.addSubview(locationDateView)

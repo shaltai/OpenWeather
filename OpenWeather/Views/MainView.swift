@@ -21,30 +21,37 @@ class MainView: UIView {
          currentCoreDataArray = try context.fetch(Current.fetchRequest())
          currentWeatherCoreDataArray = try context.fetch(CurrentWeather.fetchRequest())
          if !currentCoreDataArray.isEmpty && !currentWeatherCoreDataArray.isEmpty {
+            
             // Arrays first elements
             guard let currentCoreData = currentCoreDataArray.first,
                   let currentWeatherCoreData = currentWeatherCoreDataArray.first else { return }
+            
             // Populate table with current weather data
             guard let iconURL = currentWeatherCoreData.iconURL else { return }
+            
             // Weather Icon
             if let imageData = try? Data(contentsOf: iconURL) {
                currentWeatherIcon.image = UIImage(data: imageData)
             }
+            
             // Main weather value
             guard let mainWeatherText = currentWeatherCoreData.main else { return }
             currentWeatherMain.attributedText = NSMutableAttributedString(string: mainWeatherText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .label)
+            
             // Auxiliary weather description
             guard let descriptionWeatherText = currentWeatherCoreData.descr else { return }
             currentWeatherDescription.attributedText = NSMutableAttributedString(string: descriptionWeatherText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .secondaryLabel)
+            
             // Temperature
             let tempText = "\(Int(currentCoreData.temp))˚C"
             currentTemp.attributedText = NSMutableAttributedString(string: tempText).setupAttributes(style: .heading(level: .h1), align: .left, color: .label)
+            
             // Feels Like Temperature
             let feelsLikeText = "Feels like \(Int(currentCoreData.feels_like))˚C"
             currentFeelsLike.attributedText = NSMutableAttributedString(string: feelsLikeText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .secondaryLabel)
          }
       } catch let error as NSError {
-         print("Error \(error), \(error.userInfo)")
+         print("Error \(error.localizedDescription), \(error.userInfo)")
       }
       
       setup()
@@ -57,12 +64,16 @@ class MainView: UIView {
       // Get data from JSON and put it to Core data
       // Weather icon
       currentWeatherCoreData.iconURL = data.current.weather.first?.iconURL
+      
       // Weather
       currentWeatherCoreData.main = data.current.weather.first?.main
+      
       // Weather description
       currentWeatherCoreData.descr = data.current.weather.first?.description
+      
       // Temperature
       currentCoreData.temp = data.current.temp
+      
       // Feels Like Temperature
       currentCoreData.feels_like = data.current.feels_like
       
@@ -74,8 +85,7 @@ class MainView: UIView {
    func setup() {
       
       // Setup
-      backgroundColor = .systemPurple
-      contentView.backgroundColor = .systemTeal
+      backgroundColor = .systemBackground
       
       // Add subviews
       self.addSubview(contentView)

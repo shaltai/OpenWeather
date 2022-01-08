@@ -79,14 +79,14 @@ class SupplementaryView: UIView {
       windSpeed.setupEdgeConstraints(top: wrapperView.topAnchor,
                                      bottom: pressure.topAnchor,
                                      leading: wrapperView.leadingAnchor,
-                                     padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
+                                     padding: UIEdgeInsets(top: 12, left: 16, bottom: 16, right: 16))
       windDeg.setupEdgeConstraints(top: wrapperView.topAnchor,
                                    leading: windSpeed.trailingAnchor,
-                                   padding: UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0))
+                                   padding: UIEdgeInsets(top: 12, left: 0, bottom: 16, right: 0))
       humidity.setupEdgeConstraints(top: wrapperView.topAnchor,
                                     bottom: uvi.topAnchor,
                                     leading: wrapperView.centerXAnchor,
-                                    padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
+                                    padding: UIEdgeInsets(top: 12, left: 16, bottom: 16, right: 16))
       pressure.setupEdgeConstraints(bottom: wrapperView.bottomAnchor,
                                     leading: wrapperView.leadingAnchor,
                                     padding: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16))
@@ -106,7 +106,7 @@ class SupplementaryView: UIView {
       hourlyCollectionView.setupEdgeConstraints(trailing: trailingAnchor,
                                                 bottom: bottomAnchor,
                                                 leading: leadingAnchor,
-                                                padding: UIEdgeInsets(top: 0, left: 16, bottom: 24, right: 16))
+                                                padding: UIEdgeInsets(top: 0, left: 16, bottom: 32, right: 16))
       hourlyCollectionView.heightAnchor.constraint(equalTo: currentWeatherView.heightAnchor).isActive = true
    }
    
