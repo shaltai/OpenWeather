@@ -17,14 +17,11 @@ class LocationDateView: UIView {
    
    // Setup
    func setup() {
-      locationNameLabel.textColor = .systemGray
-      locationNameLabel.font = UIFont.systemFont(ofSize: 20)
-      
       formatter.dateFormat = "EEEE, MMM d"
-      dateLabel.text = formatter.string(from: Date())
-      dateLabel.textColor = .systemGray
-      dateLabel.textAlignment = .right
-      dateLabel.font = UIFont.systemFont(ofSize: 20)
+      let dateText = formatter.string(from: Date())
+      dateLabel.attributedText = NSMutableAttributedString(string: dateText).setupAttributes(style: .heading(level: .h4),
+                                                                                             align: .right,
+                                                                                             color: .secondaryLabel)
       
       // Add views
       self.addSubview(locationNameLabel)

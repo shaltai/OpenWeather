@@ -3,6 +3,7 @@ import UIKit
 class MainView: UIView {
    let context = Persistance.shared.persistentContainer.viewContext
    var currentCoreDataArray: [Current] = []
+   var currentWeatherCoreDataArray: [CurrentWeather] = []
    
    let contentView = UIView()
    
@@ -15,16 +16,32 @@ class MainView: UIView {
    override init(frame: CGRect) {
       super.init(frame: frame)
       
-      // Fetch current weather from Core Data
       do {
-         // 2. Потом считываете данные из базы данных
+         // Fetch current weather data from Core Data
          currentCoreDataArray = try context.fetch(Current.fetchRequest())
-         if !self.currentCoreDataArray.isEmpty {
-            // 3. И только после этого отображаете данные в таблице
-            self.currentTemp.text = "\(Int(self.currentCoreDataArray[0].temp))˚C"
-            for weather in currentCoreDataArray {
-               print(weather.temp)
+         currentWeatherCoreDataArray = try context.fetch(CurrentWeather.fetchRequest())
+         if !currentCoreDataArray.isEmpty && !currentWeatherCoreDataArray.isEmpty {
+            // Arrays first elements
+            guard let currentCoreData = currentCoreDataArray.first,
+                  let currentWeatherCoreData = currentWeatherCoreDataArray.first else { return }
+            // Populate table with current weather data
+            guard let iconURL = currentWeatherCoreData.iconURL else { return }
+            // Weather Icon
+            if let imageData = try? Data(contentsOf: iconURL) {
+               currentWeatherIcon.image = UIImage(data: imageData)
             }
+            // Main weather value
+            guard let mainWeatherText = currentWeatherCoreData.main else { return }
+            currentWeatherMain.attributedText = NSMutableAttributedString(string: mainWeatherText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .label)
+            // Auxiliary weather description
+            guard let descriptionWeatherText = currentWeatherCoreData.descr else { return }
+            currentWeatherDescription.attributedText = NSMutableAttributedString(string: descriptionWeatherText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .secondaryLabel)
+            // Temperature
+            let tempText = "\(Int(currentCoreData.temp))˚C"
+            currentTemp.attributedText = NSMutableAttributedString(string: tempText).setupAttributes(style: .heading(level: .h1), align: .left, color: .label)
+            // Feels Like Temperature
+            let feelsLikeText = "Feels like \(Int(currentCoreData.feels_like))˚C"
+            currentFeelsLike.attributedText = NSMutableAttributedString(string: feelsLikeText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .secondaryLabel)
          }
       } catch let error as NSError {
          print("Error \(error), \(error.userInfo)")
@@ -35,25 +52,23 @@ class MainView: UIView {
    
    func initMainView(data: WeatherModel) {
       let currentCoreData = Current(context: context)
+      let currentWeatherCoreData = CurrentWeather(context: context)
       
-      // Current weather icon
-      if let imageData = try? Data(contentsOf: data.current.weather.first!.iconURL) {
-         currentWeatherIcon.image = UIImage(data: imageData)
-      }
-      // Current weather
-      currentWeatherMain.text = data.current.weather.first?.main
-      // Current weather description
-      currentWeatherDescription.text = data.current.weather.first?.description
-      
-      // Current temperature
-      // Update Core data value from json
-      // 1. Вы загружаете данные, после чего сразу записываете их в реалм или CoreData
+      // Get data from JSON and put it to Core data
+      // Weather icon
+      currentWeatherCoreData.iconURL = data.current.weather.first?.iconURL
+      // Weather
+      currentWeatherCoreData.main = data.current.weather.first?.main
+      // Weather description
+      currentWeatherCoreData.descr = data.current.weather.first?.description
+      // Temperature
       currentCoreData.temp = data.current.temp
+      // Feels Like Temperature
+      currentCoreData.feels_like = data.current.feels_like
+      
       // Save context
       Persistance.shared.saveContext(context: context)
       
-      // Temperature feels like
-      currentFeelsLike.text = "Feels like \(Int(data.current.feels_like))˚C"
    }
    
    func setup() {
@@ -69,19 +84,18 @@ class MainView: UIView {
       }
       
       // Constraints
-      contentView.setupSizeConstraints(to: self, widthMultiplier: 1 / 2.5, heightMultiplier: 1 / 2.5)
+      contentView.setupSizeConstraints(to: self, widthMultiplier: 1 / 2.5, heightMultiplier: 1 / 2)
       contentView.setupCenterConstraints(to: self)
       currentWeatherIcon.setupEdgeConstraints(top: contentView.topAnchor,
                                               leading: contentView.leadingAnchor,
-                                              size: CGSize(width: 64, height: 64),
-                                              padding: UIEdgeInsets(top: -20, left: -10, bottom: 0, right: 0))
+                                              size: CGSize(width: 80, height: 80),
+                                              padding: UIEdgeInsets(top: -10, left: -10, bottom: 0, right: 0))
       currentWeatherMain.setupEdgeConstraints(top: contentView.topAnchor,
                                               leading: currentWeatherIcon.trailingAnchor)
       currentWeatherDescription.setupEdgeConstraints(top: currentWeatherMain.bottomAnchor,
                                                      leading: currentWeatherIcon.trailingAnchor)
       currentTemp.setupEdgeConstraints(top: currentWeatherDescription.bottomAnchor,
                                        trailing: contentView.trailingAnchor,
-                                       bottom: nil,
                                        leading: contentView.leadingAnchor)
       currentFeelsLike.setupEdgeConstraints(trailing: contentView.trailingAnchor,
                                             bottom: contentView.bottomAnchor,
