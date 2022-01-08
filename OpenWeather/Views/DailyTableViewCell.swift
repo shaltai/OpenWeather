@@ -16,10 +16,11 @@ class DailyTableViewCell: UITableViewCell {
    
    func initDailyTableViewCell(data: WeatherModel.Daily) {
       
-      // Weather icon and date
+      // Weather icon
       if let imageData = try? Data(contentsOf: data.weather[0].iconURL) {
          weatherIcon.image = UIImage(data: imageData)
       }
+      // Date
       formatter.dateFormat = "E, d MMM"
       dateLabel.text = formatter.string(from: data.dt)
 

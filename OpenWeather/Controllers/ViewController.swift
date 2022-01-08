@@ -134,6 +134,7 @@ class ViewController: UIPageViewController {
    }
 }
 
+// Pagination
 extension ViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
    
    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
