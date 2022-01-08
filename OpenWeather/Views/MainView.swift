@@ -30,12 +30,18 @@ class MainView: UIView {
             if let imageData = try? Data(contentsOf: iconURL) {
                currentWeatherIcon.image = UIImage(data: imageData)
             }
-            // Weather Description
-            currentWeatherDescription.text = currentWeatherCoreData.descr
+            // Main weather value
+            guard let mainWeatherText = currentWeatherCoreData.main else { return }
+            currentWeatherMain.attributedText = NSMutableAttributedString(string: mainWeatherText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .label)
+            // Auxiliary weather description
+            guard let descriptionWeatherText = currentWeatherCoreData.descr else { return }
+            currentWeatherDescription.attributedText = NSMutableAttributedString(string: descriptionWeatherText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .secondaryLabel)
             // Temperature
-            currentTemp.text = "\(Int(currentCoreData.temp))˚C"
+            let tempText = "\(Int(currentCoreData.temp))˚C"
+            currentTemp.attributedText = NSMutableAttributedString(string: tempText).setupAttributes(style: .heading(level: .h1), align: .left, color: .label)
             // Feels Like Temperature
-            currentFeelsLike.text = "Feels like \(Int(currentCoreData.feels_like))˚C"
+            let feelsLikeText = "Feels like \(Int(currentCoreData.feels_like))˚C"
+            currentFeelsLike.attributedText = NSMutableAttributedString(string: feelsLikeText).setupAttributes(style: .paragraph(level: .p3), align: .left, color: .secondaryLabel)
          }
       } catch let error as NSError {
          print("Error \(error), \(error.userInfo)")
@@ -78,19 +84,18 @@ class MainView: UIView {
       }
       
       // Constraints
-      contentView.setupSizeConstraints(to: self, widthMultiplier: 1 / 2.5, heightMultiplier: 1 / 2.5)
+      contentView.setupSizeConstraints(to: self, widthMultiplier: 1 / 2.5, heightMultiplier: 1 / 2)
       contentView.setupCenterConstraints(to: self)
       currentWeatherIcon.setupEdgeConstraints(top: contentView.topAnchor,
                                               leading: contentView.leadingAnchor,
-                                              size: CGSize(width: 64, height: 64),
-                                              padding: UIEdgeInsets(top: -20, left: -10, bottom: 0, right: 0))
+                                              size: CGSize(width: 80, height: 80),
+                                              padding: UIEdgeInsets(top: -10, left: -10, bottom: 0, right: 0))
       currentWeatherMain.setupEdgeConstraints(top: contentView.topAnchor,
                                               leading: currentWeatherIcon.trailingAnchor)
       currentWeatherDescription.setupEdgeConstraints(top: currentWeatherMain.bottomAnchor,
                                                      leading: currentWeatherIcon.trailingAnchor)
       currentTemp.setupEdgeConstraints(top: currentWeatherDescription.bottomAnchor,
                                        trailing: contentView.trailingAnchor,
-                                       bottom: nil,
                                        leading: contentView.leadingAnchor)
       currentFeelsLike.setupEdgeConstraints(trailing: contentView.trailingAnchor,
                                             bottom: contentView.bottomAnchor,

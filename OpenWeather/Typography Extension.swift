@@ -38,16 +38,16 @@ extension NSMutableAttributedString {
          // Heading levels
          switch level {
          case .h1:
-            attributes[NSAttributedString.Key.kern] = 0.7
+            attributes[NSAttributedString.Key.kern] = -8.0
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 72, weight: .bold)
          case .h2:
-            attributes[NSAttributedString.Key.kern] = 0.5
+            attributes[NSAttributedString.Key.kern] = -0.6
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 36, weight: .bold)
          case .h3:
-            attributes[NSAttributedString.Key.kern] = 0.3
+            attributes[NSAttributedString.Key.kern] = -0.4
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 24, weight: .bold)
          case .h4:
-            attributes[NSAttributedString.Key.kern] = 0.2
+            attributes[NSAttributedString.Key.kern] = -0.2
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: 20, weight: .bold)
          case .h5:
             attributes[NSAttributedString.Key.kern] = 0.1

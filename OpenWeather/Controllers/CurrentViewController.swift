@@ -21,7 +21,8 @@ class CurrentViewController: UIViewController {
       LocationLoader.shared.loadLocation(locationManager: locationManager) { placemark in
          DispatchQueue.main.async {
             guard let placemark = placemark else { return }
-            self.locationDateView.locationNameLabel.text = "\(placemark.locality ?? "Moscow"), \(placemark.country ?? "Russia")"
+            let locationText = "\(placemark.locality ?? "Moscow"), \(placemark.country ?? "Russia")"
+            self.locationDateView.locationNameLabel.attributedText = NSMutableAttributedString(string: locationText).setupAttributes(style: .heading(level: .h4), align: .left, color: .secondaryLabel)
          }
       }
       mainView.initMainView(data: data)
