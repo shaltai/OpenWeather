@@ -18,7 +18,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
             
             // First element
             guard let hourlyCoreData = hourlyCoreDataArray.first else { return }
-            print(hourlyCoreData)
             
             // Time
             let formatter = DateFormatter()
