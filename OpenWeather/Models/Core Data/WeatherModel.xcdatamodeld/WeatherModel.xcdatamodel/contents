@@ -35,8 +35,8 @@
         <relationship name="daily" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Daily" inverseName="dailyWeather" inverseEntity="Daily"/>
     </entity>
     <entity name="Hourly" representedClassName="Hourly" syncable="YES">
-        <attribute name="dt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="temp" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="temp" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="hourlyWeather" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HourlyWeather" inverseName="hourly" inverseEntity="HourlyWeather"/>
     </entity>
     <entity name="HourlyWeather" representedClassName="HourlyWeather" syncable="YES">

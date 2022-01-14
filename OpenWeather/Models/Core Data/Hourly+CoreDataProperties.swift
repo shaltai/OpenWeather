@@ -16,7 +16,7 @@ extension Hourly {
         return NSFetchRequest<Hourly>(entityName: "Hourly")
     }
 
-    @NSManaged public var dt: Date?
+    @NSManaged public var dt: Date
     @NSManaged public var temp: Double
     @NSManaged public var hourlyWeather: NSSet?
 

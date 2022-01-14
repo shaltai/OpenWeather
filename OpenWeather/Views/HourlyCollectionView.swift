@@ -1,7 +1,7 @@
 import UIKit
 
 class HourlyCollectionView: UICollectionView {
-   var data: WeatherModel?
+   let context = Persistance.shared.persistentContainer.viewContext
    
    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
       super.init(frame: frame, collectionViewLayout: layout)
@@ -11,7 +11,24 @@ class HourlyCollectionView: UICollectionView {
    }
    
    func initHourlyCollectionView(data: WeatherModel) {
-      self.data = data
+      
+      // Get data from JSON and put it to Core data
+      for hour in data.hourly[0...11] {
+         let hourlyCoreData = Hourly(context: context)
+         let hourlyWeatherCoreData = HourlyWeather(context: context)
+
+         // Time
+         hourlyCoreData.dt = hour.dt
+         
+         // Weather icon
+         hourlyWeatherCoreData.iconURL = hour.weather.first?.iconURL
+         
+         // Temperature
+         hourlyCoreData.temp = hour.temp
+         
+         // Save context
+         Persistance.shared.saveContext(context: context)
+      }
    }
    
    required init?(coder: NSCoder) {
@@ -30,8 +47,19 @@ extension HourlyCollectionView: UICollectionViewDelegateFlowLayout, UICollection
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "hourlyCollectionViewCell", for: indexPath) as! HourlyCollectionViewCell
       
-      let defaultHourly = WeatherModel.Hourly(dt: Date(), temp: 0.0, weather: [WeatherModel.Hourly.Weather(icon: "")])
-      cell.initHourlyCollectionViewCell(data: data?.hourly[indexPath.row] ?? defaultHourly)
+      // Fetch hourly weather data from Core Data
+      do {
+         let hourlyCoreDataArray: [Hourly] = try context.fetch(Hourly.fetchRequest())
+         let hourlyWeatherCoreDataArray: [HourlyWeather] = try context.fetch(HourlyWeather.fetchRequest())
+
+         if !hourlyCoreDataArray.isEmpty && !hourlyWeatherCoreDataArray.isEmpty {
+            cell.initHourlyCollectionViewCell(data: hourlyCoreDataArray[indexPath.row], dataWeather: hourlyWeatherCoreDataArray[indexPath.row])
+         }
+         
+      } catch let error as NSError {
+         print("Error \(error.localizedDescription), \(error.userInfo)")
+      }
+      
       return cell
    }
    
